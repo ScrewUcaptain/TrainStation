@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TrainStation{% endblock %}
+
+{% block main %}
+	<a class="btn-link" href="new/dest"><button >Create Destination</button></a>
+	<a class="btn-link" href="new/train"><button >Create Train</button></a>
+
+	<div class="trains-container">
+	<h2>Next 10 trains</h2>
+		{% for train in trains %}
+			<div class="train-card">
+				<div class="train-infos">
+					<div>
+						{{train.destination.category}} n°{{train.id}} to {{train.destination.name}} ({{train.destination.codeStation}})
+					</div>
+					<div>
+						arrival at : {{train.arrivalTime|date('H:i d/m/Y')}}
+					</div>  
+					<div>
+						departure at : {{train.departureTime|date('H:i d/m/Y')}}
+					</div>
+				</div>
+				<div class="train-dock">
+					{% if train.dock %}
+						dock {{train.dock}}
+						{% else %}
+						No dock assigned
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	<script>
+		
+	</script>
+{% endblock %}

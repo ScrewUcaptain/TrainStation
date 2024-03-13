@@ -1,0 +1,17 @@
+{% extends './base.html.twig' %}
+
+{% block main %}
+	{{form(form)}}
+	{% for message in app.flashes('error') %}
+            <div class="alert-error">
+                {{ message }}
+            </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	<script>
+
+	</script>
+{% endblock %}

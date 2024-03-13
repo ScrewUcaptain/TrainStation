@@ -1,0 +1,27 @@
+.btn-link, .btn-link:visited {
+	color: black;
+	text-decoration: none;
+}
+
+.trains-container {
+	margin: 2rem;
+	padding: 1rem;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.train-card {
+	margin: 1rem 0;
+	padding: 0.75rem;
+	background: #FFF;
+	color: black;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: #ffb300 0px 3px 8px;
+}
