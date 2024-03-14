@@ -1,10 +1,13 @@
+h1, h2 {
+	text-align: center;
+
+}
 .btn-link, .btn-link:visited {
 	color: black;
 	text-decoration: none;
 }
 
 .trains-container {
-	margin: 2rem;
 	padding: 1rem;
 	border-radius: 5px;
 	display: flex;
@@ -24,4 +27,104 @@
 	justify-content: space-between;
 	align-items: center;
 	box-shadow: #ffb300 0px 3px 8px;
+}
+
+.nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+form {
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form div {
+	margin: 0.5rem;
+}
+
+form button[type="submit"] {
+	width: 100%;
+}
+
+.back-btn {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	color: white;
+	background: red;
+	border: none;
+}
+
+.alert-error {
+	text-align: center;
+	color: red;
+	margin: 1rem;
+	font-size: 1.15rem;
+}
+.alert-success {
+	text-align: center;
+	color: rgb(40, 176, 40);
+	margin: 1rem;
+	font-size: 1.15rem;
+}
+
+.divTable{
+	display: table;
+	width: 100%;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+.divTableCell, .divTableHead {
+	border: 1px solid #999999;
+	display: table-cell;
+	padding: 3px 10px;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.actionsCell {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.actionsCell button {
+	margin: 0 0.5rem;
+}
+
+a.disabled, a:visited .disabled {
+	pointer-events: none;
+	cursor: default;
+}
+
+.disabled button {
+	background: grey;
+	color: white;
+	border: none;
 }

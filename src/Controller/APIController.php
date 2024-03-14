@@ -39,6 +39,7 @@ class APIController extends AbstractController
 			// save into db
 			$em->persist($dest);
 			$em->flush();
+			$this->addFlash('success', 'The destination has been added successfully!');
 			return $this->redirectToRoute('home');
 		}
 
@@ -47,10 +48,16 @@ class APIController extends AbstractController
 		]);
 	}
 
-	#[Route('/update/dest/{dest}', name: 'update_destination', methods: ['POST'])]
+	#[Route('/update/dest/{dest}', name: 'update_destination', methods: ['GET', 'POST'])]
 	public function updateDestination(Request $request, EntityManagerInterface $em, Destination $dest)
 	{
+
 		$dest = $em->getRepository(Destination::class)->find($dest);
+		// return if there is already a train bound to this destination so this can't be modified
+		if ($dest->getTrains()->count() > 0) {
+			$this->addFlash('error', 'This destination is already bound to a train, it can\'t be modified');
+			return $this->redirectToRoute('destinations');
+		}
 		$form = $this->createForm(DestinationType::class, $dest);
 		$form->handleRequest($request);
 
@@ -68,6 +75,7 @@ class APIController extends AbstractController
 			// save into db
 			$em->persist($dest);
 			$em->flush();
+			$this->addFlash('success', 'The destination has been modified successfully!');
 			return $this->redirectToRoute('home');
 		}
 
@@ -76,14 +84,24 @@ class APIController extends AbstractController
 		]);
 	}
 
-	#[Route('/delete/dest/{dest}', name: 'delete_destination')]
+	#[Route('/delete/dest/{dest}', name: 'delete_destination', methods: ['DELETE'])]
 	public function deleteDestination(EntityManagerInterface $em, Destination $dest)
 	{
 		$dest = $em->getRepository(Destination::class)->find($dest);
+
+		if ($dest->getTrains()->count() > 0) {
+			$this->addFlash('error', 'This destination is already bound to a train, it can\'t be removed');
+			return $this->redirectToRoute('destinations');
+		}
 		// delete from db
 		$em->remove($dest);
 		$em->flush();
-		return $this->redirectToRoute('home');
+		return new JsonResponse(
+			[
+				'status' => 'success',
+				'message' => 'The destination has been removed successfully!'
+			]
+		);
 	}
 
 	#[Route('/new/train', name: 'new_train', methods: ['GET', 'POST'])]
@@ -110,7 +128,8 @@ class APIController extends AbstractController
 			// save into db
 			$em->persist($train);
 			$em->flush();
-			return $this->redirectToRoute('home');
+			$this->addFlash('success', 'The train has been added successfully, and assign to dock ' . $availableDock);
+			return $this->redirectToRoute('trains');
 		}
 
 		return $this->render('form/train.html.twig', [
@@ -135,6 +154,7 @@ class APIController extends AbstractController
 			// save into db
 			$em->persist($train);
 			$em->flush();
+			$this->addFlash('success', 'The train has been modified successfully!');
 			return $this->redirectToRoute('home');
 		}
 
@@ -143,14 +163,20 @@ class APIController extends AbstractController
 		]);
 	}
 
-	#[Route('/delete/train/{train}', name: 'delete_train')]
+	#[Route('/delete/train/{train}', name: 'delete_train', methods: ['DELETE'])]
 	public function deleteTrain( EntityManagerInterface $em, Train $train)
 	{
 		$train = $em->getRepository(Train::class)->find($train);
 		// delete from db
 		$em->remove($train);
 		$em->flush();
-		return $this->redirectToRoute('home');
+
+		return new JsonResponse(
+			[
+				'status' => 'success',
+				'message' => 'The train has been removed successfully!'
+			]
+		);
 	}
 }
 

@@ -25,7 +25,7 @@ class Destination
 	#[Assert\Choice(choices: Destination::CATEGORY)]
 	private ?string $category = null;
 
-	#[ORM\OneToMany(targetEntity: Train::class, mappedBy: 'destination')]
+	#[ORM\OneToMany(targetEntity: Train::class, mappedBy: 'destination', fetch: 'EAGER')]
 	private Collection $trains;
 
 	public function __construct()

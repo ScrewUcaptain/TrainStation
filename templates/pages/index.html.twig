@@ -3,8 +3,21 @@
 {% block title %}TrainStation{% endblock %}
 
 {% block main %}
-	<a class="btn-link" href="new/dest"><button >Create Destination</button></a>
-	<a class="btn-link" href="new/train"><button >Create Train</button></a>
+	<nav class="nav">
+		<a class="btn-link" href="destinations"><button >Destinations</button></a>
+		<a class="btn-link" href="trains"><button >Trains</button></a>
+	</nav>
+	{# display flash messages#}
+	{% for message in app.flashes('success') %}
+		<div class="alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('error') %}
+		<div class="alert-error">
+			{{ message }}
+		</div>
+	{% endfor %}
 
 	<div class="trains-container">
 	<h2>Next 10 trains</h2>
@@ -31,11 +44,4 @@
 			</div>
 		{% endfor %}
 	</div>
-{% endblock %}
-
-{% block javascripts %}
-	{{parent()}}
-	<script>
-		
-	</script>
 {% endblock %}

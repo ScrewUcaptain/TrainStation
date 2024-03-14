@@ -1,6 +1,7 @@
 {% extends './base.html.twig' %}
 
 {% block main %}
+<a href="/trains"><button class="back-btn">Back</button></a>
 	{{form(form)}}
 	{% for message in app.flashes('error') %}
             <div class="alert-error">
