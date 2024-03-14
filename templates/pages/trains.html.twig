@@ -26,14 +26,17 @@
 
 		<div>
 			<form action="trains" method="get">
-				<select name="destination" id="destination">
-					<option value="all">all</option>
-						{% for dest in destinations %}
-					<option value="{{dest.name}}">{{dest.name}}</option>
-					{% endfor %}
-				</select>
 				<div>
-					<label for="datetime">Choose date for filter :</label>
+					<label for="destination">Destination :</label>
+					<select name="destination" id="destination">
+						<option value="all">all</option>
+						{% for dest in destinations %}
+							<option value="{{dest.name}}">{{dest.name}}</option>
+						{% endfor %}
+				</select>
+				</div>
+				<div>
+					<label for="datetime">Date :</label>
 					<input
 						type="datetime-local"
 						id="datetime"
